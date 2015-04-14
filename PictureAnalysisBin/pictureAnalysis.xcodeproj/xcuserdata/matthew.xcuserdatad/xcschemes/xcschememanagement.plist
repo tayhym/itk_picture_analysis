@@ -19,30 +19,20 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>composite_registration.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0AD6535D23AE483C96061D9D</key>
+		<key>2EF46BB4602E40A18934632D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>92DC7BDEA4F64E70A03876CD</key>
+		<key>42D50DCA4B8D4A14B32263FB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CF2E8CD71CB84B19B3ED9904</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E15DA1295C6446B1A3FF4222</key>
+		<key>B08591ED491A4B40A1CCCC8F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

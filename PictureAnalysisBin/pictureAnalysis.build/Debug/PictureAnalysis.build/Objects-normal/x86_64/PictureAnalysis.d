@@ -228,7 +228,6 @@ dependencies: \
   /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkProgressReporter.h \
   /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Filtering/ImageFilterBase/include/itkCastImageFilter.hxx \
   /Users/matthew/Documents/18-791/local_projects/ItkVtkGlue/QuickView.h \
-  /Users/matthew/Documents/18-791/local_projects/PictureAnalysis/composite_registration.h \
   /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Filtering/ImageGradient/include/itkGradientMagnitudeImageFilter.h \
   /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Filtering/ImageGradient/include/itkGradientMagnitudeImageFilter.hxx \
   /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkConstNeighborhoodIterator.h \

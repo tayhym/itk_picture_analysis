@@ -271,7 +271,6 @@
 /Users/matthew/Documents/18-791/local_projects/ItkVtkGlueBin/ItkVtkGlueConfig.cmake\
 /Users/matthew/Documents/18-791/local_projects/ItkVtkGlueBin/UseItkVtkGlue.cmake\
 /Users/matthew/Documents/18-791/local_projects/PictureAnalysis/CMakeLists.txt\
-/Users/matthew/Documents/18-791/local_projects/PictureAnalysis/composite_registration/CMakeLists.txt\
 /Users/matthew/Documents/18-791/local_projects/PictureAnalysisBin/CMakeFiles/3.1.1/CMakeCCompiler.cmake\
 /Users/matthew/Documents/18-791/local_projects/PictureAnalysisBin/CMakeFiles/3.1.1/CMakeCXXCompiler.cmake\
 /Users/matthew/Documents/18-791/local_projects/PictureAnalysisBin/CMakeFiles/3.1.1/CMakeSystem.cmake

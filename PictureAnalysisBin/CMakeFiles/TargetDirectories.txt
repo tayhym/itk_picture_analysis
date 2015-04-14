@@ -1,4 +1,3 @@
-/Users/matthew/Documents/18-791/local_projects/PictureAnalysisBin/composite_registration/CMakeFiles/composite_registration.dir
 /Users/matthew/Documents/18-791/local_projects/PictureAnalysisBin/CMakeFiles/ALL_BUILD.dir
 /Users/matthew/Documents/18-791/local_projects/PictureAnalysisBin/CMakeFiles/PictureAnalysis.dir
 /Users/matthew/Documents/18-791/local_projects/PictureAnalysisBin/CMakeFiles/ZERO_CHECK.dir

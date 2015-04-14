@@ -22,14 +22,8 @@ else()
   set(Glue ItkVtkGlue)
 endif()
 
-include_directories(“${PROJECT_SOURCE_DIR}/composite_registration”)
-add_subdirectory (composite_registration)
-
-
-#find_package(composite_registration REQUIRED)
-#include(${composite_registration_USE_FILE})
 
 
 add_executable(PictureAnalysis PictureAnalysis.cxx)
 
-target_link_libraries(PictureAnalysis ${Glue} ${VTK_LIBRARIES} ${ITK_LIBRARIES} composite_registration)
+target_link_libraries(PictureAnalysis ${Glue} ${VTK_LIBRARIES} ${ITK_LIBRARIES})

@@ -35,10 +35,112 @@
 // secondary header files for viewing images, visualization etc
 #include "QuickView.h"
 
+
+// tiertary header files from additional modifications
+
+
 // additional code for registration filters
-#include "composite_registration.h"
+/*************** additional code for registration filter and its corollary filters *****************/
+
+#include "itkGradientMagnitudeImageFilter.h"
+#include "itkThresholdImageFilter.h"
+#include "itkRescaleIntensityImageFilter.h"
+//  Software Guide : EndCodeSnippet
+
+#include "itkNumericTraits.h"
 
 
+namespace itk {               // namespace
+  template <class TImageType>   // template class
+  class CompositeRegistrationFilter:  // class definition
+    public ImageToImageFilter<TImageType, TImageType>
+  {
+  public: // standard variables for object factory
+    typedef CompositeRegistrationFilter Self;
+    typedef ImageToImageFilter<TImageType,TImageType> Superclass;
+    typedef SmartPointer<Self> Pointer;
+    typedef SmartPointer<const Self> ConstPointer;
+    
+    typedef typename TImageType::PixelType PixelType;
+    itkNewMacro( Self )
+    itkTypeMacro(CompositeRegistrationFilter, ImageToImageFilter);
+
+    itkGetMacro( Threshold, PixelType);
+    itkSetMacro( Threshold, PixelType);
+    
+  protected:
+    typedef ThresholdImageFilter< TImageType > ThresholdType;
+    typedef GradientMagnitudeImageFilter< TImageType, TImageType > GradientType;
+    typedef RescaleIntensityImageFilter< TImageType, TImageType > RescalerType;
+    
+    typename GradientType::Pointer m_GradientFilter;
+    typename ThresholdType::Pointer m_ThresholdFilter;
+    typename RescalerType::Pointer m_RescaleFilter;
+    PixelType m_Threshold;
+    
+    CompositeRegistrationFilter();
+    
+    void GenerateData();
+    
+    void PrintSelf( std::ostream& os, Indent indent ) const;
+    
+  };
+}
+
+//
+//  composite_registration.cpp
+//  pictureAnalysis
+//
+//  Created by Matthew Tay Han Yang on 4/13/15. from itk software guide.
+//
+//
+
+
+namespace itk {
+  
+  template <class TImageType>
+  CompositeRegistrationFilter<TImageType>
+  ::CompositeRegistrationFilter()
+  {
+    m_Threshold = 1;
+    m_GradientFilter = GradientType::New();
+    m_ThresholdFilter = ThresholdType::New();
+    m_ThresholdFilter->SetInput( m_GradientFilter->GetOutput() );
+    m_RescaleFilter = RescalerType::New();
+    m_RescaleFilter->SetInput( m_ThresholdFilter->GetOutput() );
+    m_RescaleFilter->SetOutputMinimum(
+                                      NumericTraits<PixelType>::NonpositiveMin());
+    m_RescaleFilter->SetOutputMaximum(NumericTraits<PixelType>::max());
+  }
+  
+  template <class TImageType>
+  void
+  CompositeRegistrationFilter<TImageType>::
+  GenerateData()
+  {
+    m_GradientFilter->SetInput( this->GetInput() );
+    m_ThresholdFilter->ThresholdBelow( this->m_Threshold );
+    m_RescaleFilter->GraftOutput( this->GetOutput() );
+    m_RescaleFilter->Update();
+    this->GraftOutput( m_RescaleFilter->GetOutput() );
+    std::cout <<  " composite filter ran " << std::endl;
+  }
+  
+  template <class TImageType>
+  void
+  CompositeRegistrationFilter<TImageType>::
+  PrintSelf( std::ostream& os, Indent indent ) const
+  {
+    Superclass::PrintSelf(os,indent);
+    os
+    << indent << "Threshold:" << this->m_Threshold
+    << std::endl;
+  }
+  
+  
+}
+
+/********************************************************/
 int main(int argc, char ** argv)
 {
  
@@ -85,7 +187,6 @@ int main(int argc, char ** argv)
       image_three = castFilter->GetOutput();
       viewer.AddImage<FloatImageType>(image_three);
     }
-  
   }
   
   viewer.Visualize();
@@ -97,21 +198,17 @@ int main(int argc, char ** argv)
   
 //  CompositeFilterType::Pointer compFilt = CompositeFilterType::New();
   
+  //typedef itk::CompositeExampleImageFilter<FloatImageType> FilterType;
   typedef itk::CompositeRegistrationFilter<FloatImageType> FilterType;
-
   FilterType::Pointer filter = FilterType::New();
 
+  filter->SetInput( image_one );
   
-//  compFilt->SetInput( image_one );
-//  compFilt.Update();
-//  
-//  viewer.AddImage( compFilt->GetOutput() );
-//  viewer.Visualize();
-//  
+  viewer.AddImage( filter->GetOutput() );
+  viewer.Visualize();
   
   std::cout << "done" <<std::endl;
 
-  
 //  QuickView viewer;
 //  viewer.AddImage<ImageType>(reader->GetOutput());
 //  viewer.AddImage<FloatImageType>(castFilter->GetOutput());
@@ -131,39 +228,9 @@ int main(int argc, char ** argv)
 //  writer->Update();
   
   
-  
-//  try
-//  {
-//    writer->Update();
-//  }
-//  catch( itk::ExceptionObject & err )
-//  {
-//    std::cerr << "ExceptionObject caught !" << std::endl;
-//    std::cerr << err << std::endl;
-//    return EXIT_FAILURE;
-//  }
-  
-//  typedef itk::Image<float,2> FloatImage2DType;
-//  itk::ImageFileWriter<FloatImage2DType>::Pointer writer = itk::ImageFileWriter::New();
-//  writer->SetInput (last_filter->GetOutput());
-//  writer->SetFileName( "test.raw" );
-//  writer->Update();
-  
+
   
 
   return 0;
 }
-// Software Guide : EndCodeSnippet
 
-//  Software Guide : BeginLatex
-//
-//  This code instantiates a $3D$ image\footnote{Also known as a
-//  \emph{volume}.} whose pixels are represented with type \code{unsigned
-//  short}. The image is then constructed and assigned to a
-//  \doxygen{SmartPointer}. Although later in the text we will discuss
-//  \code{SmartPointer}s in detail, for now think of it as a handle on an
-//  instance of an object (see section \ref{sec:SmartPointers} for more
-//  information). The \doxygen{Image} class will be described in
-//  Section~\ref{sec:ImageSection}.
-//
-//  Software Guide : EndLatex
