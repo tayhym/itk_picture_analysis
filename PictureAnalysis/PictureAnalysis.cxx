@@ -35,29 +35,13 @@
 // secondary header files for viewing images, visualization etc
 #include "QuickView.h"
 
+// additional code for registration filters
+#include "composite_registration.h"
 
-#include <stdio.h>
-#include <unistd.h>
-#define GetCurrentDir getcwd
+
 int main(int argc, char ** argv)
 {
-
-//  char cCurrentPath[FILENAME_MAX];
-//  
-//  if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath)))
-//  {
-//    return errno;
-//  }
-//  
-//  cCurrentPath[sizeof(cCurrentPath) - 1] = '\0'; /* not really required */
-//  
-//  printf ("The current working directory is %s", cCurrentPath);
-  
-  
-  const char * inputImageOne = argv[1];
-  const char * inputImageTwo = argv[2];
-  const char * inputImageThree = argv[3];
-  
+ 
   std::cout << "Starting analysis of image..." << std::endl;
   
   std::cout << "Reading in images from local disk..." << std::endl;
@@ -69,20 +53,61 @@ int main(int argc, char ** argv)
   typedef itk::ImageFileReader< ImageType > ReaderType;
   
   ReaderType::Pointer reader = ReaderType::New();
-
-  reader->SetFileName( inputImageOne );
-  reader->Update();
-  
   QuickView viewer;
-  viewer.AddImage<ImageType>(reader->GetOutput());
-  
-//  cast the image from unsigned to float
+
+  //  cast the image from unsigned to float
   typedef itk::Image<float,2> FloatImageType;
   typedef itk::CastImageFilter<ImageType, FloatImageType> CastFilterType;
-  CastFilterType::Pointer castFilter = CastFilterType::New();
-  castFilter->SetInput(reader->GetOutput());
-  viewer.AddImage<FloatImageType>(castFilter->GetOutput());
+  
+  
+  // read in images, and convert from unsigned to float
+  FloatImageType::Pointer image_one = FloatImageType::New();
+  FloatImageType::Pointer image_two = FloatImageType::New();
+  FloatImageType::Pointer image_three = FloatImageType::New();
+  
+  for (int i = 1; i<4 ; i++ ) {
+    char *inputImage = argv[i];
+    reader->SetFileName( inputImage );
+    reader->Update();
+    
+    CastFilterType::Pointer castFilter = CastFilterType::New();
+    castFilter->SetInput(reader->GetOutput());
+    
+    if (i==1) {
+      image_one = castFilter->GetOutput();
+      viewer.AddImage<FloatImageType>(image_one);
+
+    } else if (i==2) {
+      image_two = castFilter->GetOutput();
+      viewer.AddImage<FloatImageType>(image_two);
+
+    } else {
+      image_three = castFilter->GetOutput();
+      viewer.AddImage<FloatImageType>(image_three);
+    }
+  
+  }
+  
   viewer.Visualize();
+  
+  // TODO: Registration of the 3 images together - getting the first and third images registered to the second image
+  
+//  Corollary: the testing of the images using bluring would work
+//  typedef itk::CompositeRegistrationFilter<FloatImageType> CompositeFilterType;
+  
+//  CompositeFilterType::Pointer compFilt = CompositeFilterType::New();
+  
+  typedef itk::CompositeRegistrationFilter<FloatImageType> FilterType;
+
+  FilterType::Pointer filter = FilterType::New();
+
+  
+//  compFilt->SetInput( image_one );
+//  compFilt.Update();
+//  
+//  viewer.AddImage( compFilt->GetOutput() );
+//  viewer.Visualize();
+//  
   
   std::cout << "done" <<std::endl;
 
@@ -92,9 +117,7 @@ int main(int argc, char ** argv)
 //  viewer.AddImage<FloatImageType>(castFilter->GetOutput());
 //  viewer.Visualize();
 //  
-//  ImageType::Pointer image_one = ImageType::New();
-////  ImageType::Pointer image_two = ImageType::New();
-////  ImageType::Pointer image_three = ImageType::New();
+
 //  
 //  
 //  std::cout << "Display the image read from local disk " << std::endl;

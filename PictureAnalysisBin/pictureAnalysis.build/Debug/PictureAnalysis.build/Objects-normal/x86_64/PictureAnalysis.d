@@ -227,4 +227,28 @@ dependencies: \
   /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkUnaryFunctorImageFilter.hxx \
   /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkProgressReporter.h \
   /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Filtering/ImageFilterBase/include/itkCastImageFilter.hxx \
-  /Users/matthew/Documents/18-791/local_projects/ItkVtkGlue/QuickView.h
+  /Users/matthew/Documents/18-791/local_projects/ItkVtkGlue/QuickView.h \
+  /Users/matthew/Documents/18-791/local_projects/PictureAnalysis/composite_registration.h \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Filtering/ImageGradient/include/itkGradientMagnitudeImageFilter.h \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Filtering/ImageGradient/include/itkGradientMagnitudeImageFilter.hxx \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkConstNeighborhoodIterator.h \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkZeroFluxNeumannBoundaryCondition.h \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkZeroFluxNeumannBoundaryCondition.hxx \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkConstNeighborhoodIterator.hxx \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkNeighborhoodInnerProduct.h \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkNeighborhoodIterator.h \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkNeighborhoodIterator.hxx \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkConstSliceIterator.h \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkNeighborhoodInnerProduct.hxx \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkDerivativeOperator.h \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkNeighborhoodOperator.h \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkNeighborhoodOperator.hxx \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkDerivativeOperator.hxx \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkNeighborhoodAlgorithm.h \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkNeighborhoodAlgorithm.hxx \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Filtering/Thresholding/include/itkThresholdImageFilter.h \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Filtering/Thresholding/include/itkThresholdImageFilter.hxx \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Filtering/ImageIntensity/include/itkRescaleIntensityImageFilter.h \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Filtering/ImageIntensity/include/itkRescaleIntensityImageFilter.hxx \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkMinimumMaximumImageCalculator.h \
+  /Users/matthew/Documents/18-791/MIIA/SITKBin/ITK/Modules/Core/Common/include/itkMinimumMaximumImageCalculator.hxx
