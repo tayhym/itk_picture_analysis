@@ -22,8 +22,8 @@ else()
   set(Glue ItkVtkGlue)
 endif()
 
+add_subdirectory (CompositeFilter)
+include_directories ("${PROJECT_SOURCE_DIR}/CompositeFilter")
 
-
-add_executable(PictureAnalysis PictureAnalysis.cxx)
-
-target_link_libraries(PictureAnalysis ${Glue} ${VTK_LIBRARIES} ${ITK_LIBRARIES})
+add_executable (PictureAnalysis pictureAnalysis.cxx)
+target_link_libraries (PictureAnalysis ${Glue} ${VTK_LIBRARIES} ${ITK_LIBRARIES} ${CompositeFilter})

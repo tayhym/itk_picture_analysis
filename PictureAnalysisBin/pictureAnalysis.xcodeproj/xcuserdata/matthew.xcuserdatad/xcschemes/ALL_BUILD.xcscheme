@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B08591ED491A4B40A1CCCC8F"
+               BlueprintIdentifier = "D149C055AFE846E382BC6A19"
                BuildableName = "ALL_BUILD"
                BlueprintName = "ALL_BUILD"
                ReferencedContainer = "container:../PictureAnalysisBin/pictureAnalysis.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B08591ED491A4B40A1CCCC8F"
+            BlueprintIdentifier = "D149C055AFE846E382BC6A19"
             BuildableName = "ALL_BUILD"
             BlueprintName = "ALL_BUILD"
             ReferencedContainer = "container:../PictureAnalysisBin/pictureAnalysis.xcodeproj">
@@ -60,7 +60,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B08591ED491A4B40A1CCCC8F"
+            BlueprintIdentifier = "D149C055AFE846E382BC6A19"
             BuildableName = "ALL_BUILD"
             BlueprintName = "ALL_BUILD"
             ReferencedContainer = "container:../PictureAnalysisBin/pictureAnalysis.xcodeproj">

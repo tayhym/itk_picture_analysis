@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>CompositeFilter.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>PictureAnalysis.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2EF46BB4602E40A18934632D</key>
+		<key>063238B0646F4EB982DD1629</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>42D50DCA4B8D4A14B32263FB</key>
+		<key>97B646EB348641C782AF0029</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B08591ED491A4B40A1CCCC8F</key>
+		<key>D149C055AFE846E382BC6A19</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F8CA2E6140A24EF1B4920200</key>
 		<dict>
 			<key>primary</key>
 			<true/>

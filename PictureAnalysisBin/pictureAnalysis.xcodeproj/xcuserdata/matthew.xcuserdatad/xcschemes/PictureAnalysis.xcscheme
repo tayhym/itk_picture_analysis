@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2EF46BB4602E40A18934632D"
+               BlueprintIdentifier = "97B646EB348641C782AF0029"
                BuildableName = "PictureAnalysis"
                BlueprintName = "PictureAnalysis"
                ReferencedContainer = "container:../PictureAnalysisBin/pictureAnalysis.xcodeproj">
@@ -32,7 +32,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2EF46BB4602E40A18934632D"
+            BlueprintIdentifier = "97B646EB348641C782AF0029"
             BuildableName = "PictureAnalysis"
             BlueprintName = "PictureAnalysis"
             ReferencedContainer = "container:../PictureAnalysisBin/pictureAnalysis.xcodeproj">
@@ -52,7 +52,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2EF46BB4602E40A18934632D"
+            BlueprintIdentifier = "97B646EB348641C782AF0029"
             BuildableName = "PictureAnalysis"
             BlueprintName = "PictureAnalysis"
             ReferencedContainer = "container:../PictureAnalysisBin/pictureAnalysis.xcodeproj">
@@ -71,7 +71,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2EF46BB4602E40A18934632D"
+            BlueprintIdentifier = "97B646EB348641C782AF0029"
             BuildableName = "PictureAnalysis"
             BlueprintName = "PictureAnalysis"
             ReferencedContainer = "container:../PictureAnalysisBin/pictureAnalysis.xcodeproj">

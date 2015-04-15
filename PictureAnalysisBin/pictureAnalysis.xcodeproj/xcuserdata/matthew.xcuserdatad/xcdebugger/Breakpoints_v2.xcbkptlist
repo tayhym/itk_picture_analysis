@@ -9,12 +9,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../pictureAnalysis/PictureAnalysis.cxx"
-            timestampString = "450677678.163163"
+            filePath = "../pictureAnalysis/registration_mutual_information.cpp"
+            timestampString = "450819797.035178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "335"
-            endingLineNumber = "335">
+            startingLineNumber = "9"
+            endingLineNumber = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

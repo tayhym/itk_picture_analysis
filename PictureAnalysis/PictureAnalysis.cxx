@@ -15,15 +15,6 @@
  *  limitations under the License.
  *
  *=========================================================================*/
-//  Software Guide : BeginLatex
-//
-//  The following code is an implementation of a small ITK
-//  program. It tests including header files and linking with ITK
-//  libraries.
-//
-//  Software Guide : EndLatex
-
-// Software Guide : BeginCodeSnippet
 
 // the header files for core itk modules
 #include "itkImage.h"
@@ -37,108 +28,30 @@
 
 
 // tiertary header files from additional modifications
+#include "itkDemonsRegistrationFilter.h"
+#include "itkHistogramMatchingImageFilter.h"
+#include "itkWarpImageFilter.h"
+
+/********************************************************/
 
 
-// additional code for registration filters
-/*************** additional code for registration filter and its corollary filters *****************/
+#include "itkImageRegistrationMethodv4.h"
+#include "itkTranslationTransform.h"
+#include "itkMeanSquaresImageToImageMetricv4.h"
+#include "itkRegularStepGradientDescentOptimizerv4.h"
+// Software Guide : EndCodeSnippet
 
-#include "itkGradientMagnitudeImageFilter.h"
-#include "itkThresholdImageFilter.h"
+
+#include "itkResampleImageFilter.h"
+#include "itkCastImageFilter.h"
 #include "itkRescaleIntensityImageFilter.h"
-//  Software Guide : EndCodeSnippet
+#include "itkSubtractImageFilter.h"
 
-#include "itkNumericTraits.h"
+#include "CompositeFilter/CompositeFilter.cpp"
 
-
-namespace itk {               // namespace
-  template <class TImageType>   // template class
-  class CompositeRegistrationFilter:  // class definition
-    public ImageToImageFilter<TImageType, TImageType>
-  {
-  public: // standard variables for object factory
-    typedef CompositeRegistrationFilter Self;
-    typedef ImageToImageFilter<TImageType,TImageType> Superclass;
-    typedef SmartPointer<Self> Pointer;
-    typedef SmartPointer<const Self> ConstPointer;
-    
-    typedef typename TImageType::PixelType PixelType;
-    itkNewMacro( Self )
-    itkTypeMacro(CompositeRegistrationFilter, ImageToImageFilter);
-
-    itkGetMacro( Threshold, PixelType);
-    itkSetMacro( Threshold, PixelType);
-    
-  protected:
-    typedef ThresholdImageFilter< TImageType > ThresholdType;
-    typedef GradientMagnitudeImageFilter< TImageType, TImageType > GradientType;
-    typedef RescaleIntensityImageFilter< TImageType, TImageType > RescalerType;
-    
-    typename GradientType::Pointer m_GradientFilter;
-    typename ThresholdType::Pointer m_ThresholdFilter;
-    typename RescalerType::Pointer m_RescaleFilter;
-    PixelType m_Threshold;
-    
-    CompositeRegistrationFilter();
-    
-    void GenerateData();
-    
-    void PrintSelf( std::ostream& os, Indent indent ) const;
-    
-  };
-}
-
-//
-//  composite_registration.cpp
-//  pictureAnalysis
-//
-//  Created by Matthew Tay Han Yang on 4/13/15. from itk software guide.
-//
-//
-
-
-namespace itk {
-  
-  template <class TImageType>
-  CompositeRegistrationFilter<TImageType>
-  ::CompositeRegistrationFilter()
-  {
-    m_Threshold = 1;
-    m_GradientFilter = GradientType::New();
-    m_ThresholdFilter = ThresholdType::New();
-    m_ThresholdFilter->SetInput( m_GradientFilter->GetOutput() );
-    m_RescaleFilter = RescalerType::New();
-    m_RescaleFilter->SetInput( m_ThresholdFilter->GetOutput() );
-    m_RescaleFilter->SetOutputMinimum(
-                                      NumericTraits<PixelType>::NonpositiveMin());
-    m_RescaleFilter->SetOutputMaximum(NumericTraits<PixelType>::max());
-  }
-  
-  template <class TImageType>
-  void
-  CompositeRegistrationFilter<TImageType>::
-  GenerateData()
-  {
-    m_GradientFilter->SetInput( this->GetInput() );
-    m_ThresholdFilter->ThresholdBelow( this->m_Threshold );
-    m_RescaleFilter->GraftOutput( this->GetOutput() );
-    m_RescaleFilter->Update();
-    this->GraftOutput( m_RescaleFilter->GetOutput() );
-    std::cout <<  " composite filter ran " << std::endl;
-  }
-  
-  template <class TImageType>
-  void
-  CompositeRegistrationFilter<TImageType>::
-  PrintSelf( std::ostream& os, Indent indent ) const
-  {
-    Superclass::PrintSelf(os,indent);
-    os
-    << indent << "Threshold:" << this->m_Threshold
-    << std::endl;
-  }
-  
-  
-}
+//#include "registration_one.cpp"
+//#include "registration_two.cpp"
+#include "registration_mutual_information.cpp"
 
 /********************************************************/
 int main(int argc, char ** argv)
@@ -167,14 +80,14 @@ int main(int argc, char ** argv)
   FloatImageType::Pointer image_two = FloatImageType::New();
   FloatImageType::Pointer image_three = FloatImageType::New();
   
+  CastFilterType::Pointer castFilter = CastFilterType::New();
   for (int i = 1; i<4 ; i++ ) {
     char *inputImage = argv[i];
     reader->SetFileName( inputImage );
     reader->Update();
     
-    CastFilterType::Pointer castFilter = CastFilterType::New();
-    castFilter->SetInput(reader->GetOutput());
     
+    castFilter->SetInput(reader->GetOutput());
     if (i==1) {
       image_one = castFilter->GetOutput();
       viewer.AddImage<FloatImageType>(image_one);
@@ -193,44 +106,69 @@ int main(int argc, char ** argv)
   
   // TODO: Registration of the 3 images together - getting the first and third images registered to the second image
   
-//  Corollary: the testing of the images using bluring would work
-//  typedef itk::CompositeRegistrationFilter<FloatImageType> CompositeFilterType;
   
-//  CompositeFilterType::Pointer compFilt = CompositeFilterType::New();
   
-  //typedef itk::CompositeExampleImageFilter<FloatImageType> FilterType;
-  typedef itk::CompositeRegistrationFilter<FloatImageType> FilterType;
-  FilterType::Pointer filter = FilterType::New();
-
-  filter->SetInput( image_one );
-  
-  viewer.AddImage( filter->GetOutput() );
-  viewer.Visualize();
+//  typedef itk::CompositeRegistrationFilter<FloatImageType> FilterType;
+//  FilterType::Pointer filter = FilterType::New();
+//
+//  filter->SetInput( image_one );
+//  
+//  viewer.AddImage( filter->GetOutput() );
+//  viewer.Visualize();
   
   std::cout << "done" <<std::endl;
 
-//  QuickView viewer;
-//  viewer.AddImage<ImageType>(reader->GetOutput());
-//  viewer.AddImage<FloatImageType>(castFilter->GetOutput());
-//  viewer.Visualize();
-//  
+  
+  
+  // registration code
+  char *fixed_image = argv[2];
+  char *moving_image = argv[1];
+  
+//  Registration_LinearTranslation *lin_reg = new Registration_LinearTranslation(fixed_image,moving_image);
+//  lin_reg->start_registration();
+  
+//  ContoursRegistration *cont_reg = new ContoursRegistration(fixed_image,moving_image);
+//  cont_reg->start_registration();
 
+  QuickView viewer2;
+
+  CastFilterType::Pointer castFilter2 = CastFilterType::New();
+  ReaderType::Pointer reader2 = ReaderType::New();
+//  reader2->SetFileName( "demons_registration.jpg");
+//  castFilter2->SetInput(reader2->GetOutput());
+//  FloatImageType::Pointer inputImage = castFilter2->GetOutput();
+//  viewer2.AddImage<FloatImageType>(inputImage); // deformed
+//
 //  
 //  
-//  std::cout << "Display the image read from local disk " << std::endl;
-//  
-//  
-//  std::cout << "Writing processed images to local disk..." << std::endl;
-//  typedef itk::ImageFileWriter< ImageType > WriterType;
-//  WriterType::Pointer writer = WriterType::New();
-//  writer->SetFileName( "test.tif" );
-//  writer->SetInput( reader->GetOutput() );
-//  writer->Update();
+//  reader2->SetFileName( argv[1] );
+//  castFilter2->SetInput( reader2->GetOutput() );
+//  viewer2.AddImage<FloatImageType>(castFilter2->GetOutput() ); // orig
+//
+//  reader2->SetFileName( argv[2] );
+//  castFilter2->SetInput( reader2->GetOutput() );
+//  viewer2.AddImage<FloatImageType>( castFilter2->GetOutput() );  // target
   
   
 
-  
+  MutualInformationRegistration *mi_reg = new MutualInformationRegistration(argv[2], argv[1]);
+  typedef itk::Image<unsigned char,2> CharImageType;
+  CharImageType::Pointer deformedImage = mi_reg->start_registration();
 
+  reader2->SetFileName( argv[1] );
+  castFilter2->SetInput( reader2->GetOutput() );
+  viewer2.AddImage<FloatImageType>(castFilter2->GetOutput() ); // orig
+  
+  viewer2.AddImage<CharImageType>(deformedImage); // deformed
+
+  reader2->SetFileName( argv[2] );
+  castFilter2->SetInput( reader2->GetOutput() );
+  viewer2.AddImage<FloatImageType>( castFilter2->GetOutput() );  // target
+
+
+  viewer2.Visualize();
+
+  
   return 0;
 }
 
